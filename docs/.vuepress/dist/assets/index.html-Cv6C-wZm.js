@@ -1,0 +1,1 @@
+import{_ as t,c as n,a,o}from"./app-BJFM-C_7.js";const r={};function l(s,e){return o(),n("div",null,[...e[0]||(e[0]=[a("p",null,"Hello MOF",-1)])])}const i=t(r,[["render",l]]),d=JSON.parse('{"path":"/","title":"","lang":"en-US","frontmatter":{},"git":{},"filePathRelative":"index.md"}');export{i as comp,d as data};
