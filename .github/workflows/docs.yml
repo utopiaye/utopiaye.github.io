@@ -1,40 +1,49 @@
-name: 部署 VuePress 到 GitHub Pages
+name: docs
 
-# 触发条件：当推送到 main 分支时执行
 on:
+  # 每当 push 到 main 分支时触发部署
   push:
-    branches: [ main ]  # 如果你用的是 master 分支，改为 master
+    branches: [main]
+  # 手动触发部署
+  workflow_dispatch:
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest  # 使用 Ubuntu 系统运行
+  docs:
+    runs-on: ubuntu-latest
 
     steps:
-      # 步骤 1：拉取代码到服务器
-      - name: 拉取代码
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 拉取完整历史
+          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          fetch-depth: 0
 
-      # 步骤 2：安装 Node.js
-      - name: 安装 Node.js
+      - name: 设置 pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20  # 使用 Node.js 20 版本（可根据需要修改）
+          # 选择要使用的 node 版本
+          node-version: 22
+          # 缓存 pnpm 依赖
+          cache: pnpm
 
-      # 步骤 3：安装依赖并构建
-      - name: 安装依赖并构建
-        run: |
-          npm install  # 安装项目依赖
-          npm run docs:build  # 执行构建命令，生成静态文件
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
 
-      # 步骤 4：部署到 GitHub Pages
+      # 运行构建脚本
+      - name: 构建 VuePress 站点
+        run: pnpm docs:build
+
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
       - name: 部署到 GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: crazy-max/ghaction-github-pages@v4
         with:
-          # 部署密钥（无需修改，GitHub 自动生成）
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 构建产物的路径（VuePress 构建后默认在 docs/.vuepress/dist）
-          publish_dir: ./docs/.vuepress/dist
-          # 部署到 gh-pages 分支（自动创建）
-          publish_branch: gh-pages
+          # 部署到 gh-pages 分支
+          target_branch: gh-pages
+          # 部署目录为 VuePress 的默认输出目录
+          build_dir: docs/.vuepress/dist
+        env:
+          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
