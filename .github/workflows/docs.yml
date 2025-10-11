@@ -51,7 +51,6 @@ jobs:
           pnpm install --frozen-lockfile
         # 失败时重试一次
         continue-on-error: false
-        retries: 1
 
       - name: 代码质量检查
         run: |
