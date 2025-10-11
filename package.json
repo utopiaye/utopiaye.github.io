@@ -17,6 +17,8 @@
   "scripts": {
     "build": "vuepress build docs --dest docs-dist",
     "dev": "vuepress dev docs --no-cache --temp .temp",
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs",
     "lint": "eslint --ext .js,.vue lib docs",
     "semantic-release": "semantic-release",
     "serve": "vuepress serve docs --dest docs-dist",
