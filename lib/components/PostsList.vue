@@ -85,11 +85,9 @@ export default {
       }
 
       const timeRegex = /(\d{4}-\d{2}-\d{2})(-\d{2}-\d{2}-\d{2})?/
-
       return posts.sort(function (a, b) {
-        const matchA = a.path.match(timeRegex)
-        const matchB = b.path.match(timeRegex)
-
+        const matchA = a.relativePath.match(timeRegex)
+        const matchB = b.relativePath.match(timeRegex)
         function getTimeStr (post, match) {
           if (match && match[0]) {
             return match[0].replace(/-/g, ' ')
@@ -106,7 +104,7 @@ export default {
         const timeA = getTimeStr(a, matchA)
         const timeB = getTimeStr(b, matchB)
 
-        return new Date(timeA) - new Date(timeB)
+        return new Date(timeB) - new Date(timeA)
       })
     },
 
