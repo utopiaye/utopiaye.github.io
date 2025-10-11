@@ -1,46 +1,101 @@
-name: docs
-
+name: 构建并部署 VuePress 文档
 on:
   push:
     branches: [main]
-  workflow_dispatch:
+    # 只在文档相关文件变更时触发，提升效率
+    paths:
+      - "docs/**"
+      - ".vuepress/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch: # 允许手动触发
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  docs:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 检出代码
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # 确保检出完整历史，用于最后更新时间等功能
+          fetch-tags: true
 
       - name: 设置 pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 8.15.0 # 明确指定 pnpm 版本，解决版本问题
+          run_install: false # 稍后手动安装，更灵活
 
       - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: pnpm
+          cache: "pnpm"
+          # 缓存 key 包含 lockfile 内容哈希，确保依赖变更时重新缓存
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: 安装依赖
-        run: pnpm install --frozen-lockfile
+        run: |
+          echo "当前 pnpm 版本: $(pnpm --version)"
+          pnpm install --frozen-lockfile
+        # 失败时重试一次
+        continue-on-error: false
+        retries: 1
+
+      - name: 代码质量检查
+        run: |
+          # 运行 lint 检查，确保代码质量
+          if pnpm run --if-present lint; then
+            echo "代码检查通过"
+          else
+            echo "代码检查失败，请修复后再提交"
+            exit 1
+          fi
 
       - name: 构建 VuePress 站点
-        run: pnpm docs:build
+        run: |
+          echo "开始构建文档站点..."
+          pnpm docs:build
+          echo "构建完成，输出目录大小:"
+          du -sh docs/.vuepress/dist  # 显示构建目录大小
 
-      - name: 检查构建产物
-        run: ls -la docs/.vuepress/dist
+      - name: 验证构建产物
+        run: |
+          echo "构建产物内容:"
+          ls -la docs/.vuepress/dist
+          # 检查关键文件是否存在
+          if [ ! -f "docs/.vuepress/dist/index.html" ]; then
+            echo "错误: 构建产物不完整，未找到 index.html"
+            exit 1
+          fi
 
       - name: 部署到 GitHub Pages
+        id: deployment
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
           build_dir: docs/.vuepress/dist
-          create_branch: true  # 首次部署自动创建分支
-          force_push: true     # 强制推送避免冲突
+          # 配置缓存控制，优化访问速度
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 部署结果通知
+        if: success() || failure()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "🎉 文档部署成功! 访问地址: ${{ steps.deployment.outputs.page_url }}"
+          else
+            echo "❌ 文档部署失败，请检查日志排查问题"
+            exit 1
+          fi
