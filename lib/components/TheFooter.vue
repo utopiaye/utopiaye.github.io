@@ -35,10 +35,10 @@
         <span> | </span>
 
         <a
-          href="https://github.com/meteorlxy/vuepress-theme-meteorlxy"
+          href="https://github.com/utopiaye"
           target="_blank"
         >
-          meteorlxy
+          cgy
         </a>
       </template>
     </p>

@@ -18,7 +18,7 @@ module.exports = {
     [
       '@vuepress/google-analytics',
       {
-        ga: 'UA-132770851-2',
+        ga: 'UA-132770851-331',
       },
     ],
   ],
@@ -48,13 +48,11 @@ module.exports = {
 
   themeConfig: {
     lang: 'en-US',
-
     personalInfo: {
       nickname: 'cgy',
       description: 'MOF',
       email: '307191020@qq.com',
       location: 'gz, China',
-      organization: 'Tencent',
       avatar: 'https://www.meteorlxy.cn/assets/img/avatar.jpg',
       sns: {
         github: {
@@ -111,7 +109,7 @@ module.exports = {
     },
 
     pagination: {
-      perPage: 5,
+      perPage: 10,
     },
   },
 }
