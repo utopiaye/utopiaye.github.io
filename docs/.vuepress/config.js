@@ -53,7 +53,7 @@ module.exports = {
       description: 'MOF',
       email: '307191020@qq.com',
       location: 'GZ, China',
-      avatar: 'https://www.meteorlxy.cn/assets/img/avatar.jpg',
+      avatar: 'https://media.istockphoto.com/id/2189823694/zh/%E7%85%A7%E7%89%87/3d-rendering-of-structure-mg-mof-74-and-scattered-co2-molecules.jpg?s=1024x1024&w=is&k=20&c=sBt4fcgmpgogyvmEa0-CgRIGfa4BHbiClrsJgxperR8=',
       sns: {
         github: {
           account: 'utopiaye',
