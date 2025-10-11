@@ -15,13 +15,13 @@
     "lib/"
   ],
   "scripts": {
-    "build": "vuepress build docs --dest docs-dist",
+    "build": "vuepress build docs --dest dist",
     "dev": "vuepress dev docs --no-cache --temp .temp",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
     "lint": "eslint --ext .js,.vue lib docs",
     "semantic-release": "semantic-release",
-    "serve": "vuepress serve docs --dest docs-dist",
+    "serve": "vuepress serve docs --dest dist",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1 && git add CHANGELOG.md"
   },
   "husky": {
