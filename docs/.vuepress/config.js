@@ -54,12 +54,6 @@ module.exports = {
       email: '307191020@qq.com',
       location: 'GZ, China',
       avatar: 'https://media.istockphoto.com/id/183047071/zh/%E7%85%A7%E7%89%87/glucosamine-model.jpg?s=1024x1024&w=is&k=20&c=IEEVy-GBToPRGR81qCKAaWkquc_4f9lL_B_nFPJDjj0=',
-      sns: {
-        github: {
-          account: 'utopiaye',
-          link: 'https://github.com/utopiaye',
-        },
-      },
     },
 
     header: {

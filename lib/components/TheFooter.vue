@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <p
-      v-if="sns"
+      v-if="sns && false"
       class="footer-sns-links"
     >
       <a
@@ -19,7 +19,7 @@
     </p>
 
     <p
-      v-if="poweredBy"
+      v-if="poweredBy && false"
       class="footer-text"
     >
       <span>Powered by </span>
@@ -38,7 +38,7 @@
           href="https://github.com/utopiaye"
           target="_blank"
         >
-          utopiaye
+          cgy
         </a>
       </template>
     </p>
