@@ -38,7 +38,7 @@
           href="https://github.com/utopiaye"
           target="_blank"
         >
-          cgy
+          utopiaye
         </a>
       </template>
     </p>

@@ -4,7 +4,7 @@ require('dotenv').config()
 module.exports = {
   title: 'Metal-Organic-Framework',
 
-  description: "MOF INFO. of cgy's blog",
+  description: "MOF INFO. of utopiaye's blog",
 
   locales: {
     '/': {
@@ -49,14 +49,14 @@ module.exports = {
   themeConfig: {
     lang: 'en-US',
     personalInfo: {
-      nickname: 'cgy',
+      nickname: 'utopiaye',
       description: 'MOF',
       email: '307191020@qq.com',
-      location: 'gz, China',
+      location: 'GZ, China',
       avatar: 'https://www.meteorlxy.cn/assets/img/avatar.jpg',
       sns: {
         github: {
-          account: 'cgy',
+          account: 'utopiaye',
           link: 'https://github.com/utopiaye',
         },
       },
@@ -101,7 +101,7 @@ module.exports = {
     },
 
     comments: {
-      owner: 'cgy',
+      owner: 'utopiaye',
       repo: 'Metal-Organic-Framework',
       clientId: process.env.VUEPRESS_COMMENT_CLIENT_ID,
       clientSecret: process.env.VUEPRESS_COMMENT_CLIENT_SECRET,
