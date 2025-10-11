@@ -15,7 +15,7 @@
     "lib/"
   ],
   "scripts": {
-    "build": "vuepress build docs --dest dist",
+    "build": "vuepress build docs dist",
     "dev": "vuepress dev docs --no-cache --temp .temp",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
