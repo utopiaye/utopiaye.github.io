@@ -7,7 +7,7 @@ on:
       - "docs/**"
       - ".vuepress/**"
       - "package.json"
-      - "pnpm-lock.yaml"
+      - "package-lock.json"
       - ".github/workflows/docs.yml"
   workflow_dispatch: # 允许手动触发
 
@@ -31,31 +31,24 @@ jobs:
           # 确保检出完整历史，用于最后更新时间等功能
           fetch-tags: true
 
-      - name: 设置 pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 8.15.0 # 明确指定 pnpm 版本，解决版本问题
-          run_install: false # 稍后手动安装，更灵活
-
       - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "pnpm"
+          cache: "npm"
           # 缓存 key 包含 lockfile 内容哈希，确保依赖变更时重新缓存
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: package-lock.json
 
       - name: 安装依赖
         run: |
-          echo "当前 pnpm 版本: $(pnpm --version)"
-          pnpm install --frozen-lockfile
-        # 失败时重试一次
+          echo "当前 npm 版本: $(npm --version)"
+          npm ci
         continue-on-error: false
 
       - name: 代码质量检查
         run: |
           # 运行 lint 检查，确保代码质量
-          if pnpm run --if-present lint; then
+          if npm run --if-present lint; then
             echo "代码检查通过"
           else
             echo "代码检查失败，请修复后再提交"
@@ -65,7 +58,7 @@ jobs:
       - name: 构建 VuePress 站点
         run: |
           echo "开始构建文档站点..."
-          pnpm docs:build
+          npm run docs:build
           echo "构建完成，输出目录大小:"
           du -sh docs/.vuepress/dist  # 显示构建目录大小
 
@@ -85,7 +78,6 @@ jobs:
         with:
           target_branch: gh-pages
           build_dir: docs/.vuepress/dist
-          # 配置缓存控制，优化访问速度
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
