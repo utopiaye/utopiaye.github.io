@@ -2,3 +2,4 @@
 .temp
 docs-dist
 node_modules
+!.eslintrc.js
