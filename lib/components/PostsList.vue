@@ -88,7 +88,7 @@ export default {
 
       return posts.sort(function (a, b) {
         const matchA = a.path.match(timeRegex)
-        var matchB = b.path.match(timeRegex)
+        const matchB = b.path.match(timeRegex)
 
         function getTimeStr (post, match) {
           if (match && match[0]) {
@@ -106,7 +106,7 @@ export default {
         const timeA = getTimeStr(a, matchA)
         const timeB = getTimeStr(b, matchB)
 
-        return new Date(timeB) - new Date(timeA)
+        return new Date(timeA) - new Date(timeB)
       })
     },
 
