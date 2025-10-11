@@ -47,13 +47,13 @@ module.exports = {
   theme: path.resolve(__dirname, '../../lib'),
 
   themeConfig: {
-    lang: 'en-US',
+    lang: 'zh-CN',
     personalInfo: {
       nickname: 'utopiaye',
       description: 'MOF',
       email: '307191020@qq.com',
       location: 'GZ, China',
-      avatar: 'https://media.istockphoto.com/id/2189823694/zh/%E7%85%A7%E7%89%87/3d-rendering-of-structure-mg-mof-74-and-scattered-co2-molecules.jpg?s=1024x1024&w=is&k=20&c=sBt4fcgmpgogyvmEa0-CgRIGfa4BHbiClrsJgxperR8=',
+      avatar: 'https://media.istockphoto.com/id/183047071/zh/%E7%85%A7%E7%89%87/glucosamine-model.jpg?s=1024x1024&w=is&k=20&c=IEEVy-GBToPRGR81qCKAaWkquc_4f9lL_B_nFPJDjj0=',
       sns: {
         github: {
           account: 'utopiaye',

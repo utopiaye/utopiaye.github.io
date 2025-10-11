@@ -1,7 +1,7 @@
 <template>
   <div class="main-div">
     <div
-      v-if="categories"
+      v-if="categories && false"
       class="filter-categories"
     >
       <h3>
@@ -14,7 +14,7 @@
     </div>
 
     <div
-      v-if="tags"
+      v-if="tags && false"
       class="filter-tags"
     >
       <h3>
@@ -94,11 +94,13 @@ export default {
       let filteredPosts = this.posts || this.$posts
 
       if (this.categories && this.filterCategory) {
-        filteredPosts = filteredPosts.filter(p => p.category === this.filterCategory)
+        filteredPosts = filteredPosts.filter(
+          (p) => p.category === this.filterCategory,
+        )
       }
 
       if (this.tags && this.filterTags.length !== 0) {
-        filteredPosts = filteredPosts.filter(p => {
+        filteredPosts = filteredPosts.filter((p) => {
           const postTags = p.tags
           for (const tag of this.filterTags) {
             if (postTags.includes(tag)) {
@@ -111,23 +113,24 @@ export default {
 
       if (this.search && this.filterSearch !== '') {
         const searchString = this.filterSearch.toLowerCase().trim()
-        const match = item => {
+        const match = (item) => {
           if (typeof item === 'string') {
             return item.toLowerCase().includes(searchString)
           }
 
           if (Array.isArray(item)) {
-            return item.map(i => match(i)).includes(true)
+            return item.map((i) => match(i)).includes(true)
           }
 
           return false
         }
-        filteredPosts = filteredPosts.filter(p =>
-          match(p.title) ||
-          match(p.excerpt) ||
-          match(p.frontmatter.description) ||
-          match(p.tags) ||
-          match(p.category),
+        filteredPosts = filteredPosts.filter(
+          (p) =>
+            match(p.title) ||
+            match(p.excerpt) ||
+            match(p.frontmatter.description) ||
+            match(p.tags) ||
+            match(p.category),
         )
       }
 
