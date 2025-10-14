@@ -15,9 +15,9 @@
     "lib/"
   ],
   "scripts": {
-    "build": "vuepress build docs dist",
+    "build": "vuepress build docs dist && node -e \"const fs = require('fs'); const path = require('path'); const src = path.resolve(__dirname, 'CNAME'); const dest = path.resolve(__dirname, 'docs/.vuepress/dist/CNAME'); try { fs.copyFileSync(src, dest); console.log('CNAME copied to dist') } catch (err) { console.error('复制CNAME失败:', err.message); process.exit(1) }\"",
     "dev": "vuepress dev docs --no-cache --temp .temp",
-    "docs:build": "vuepress build docs",
+    "docs:build": "vuepress build docs && node -e \"const fs = require('fs'); const path = require('path'); const src = path.resolve(__dirname, 'CNAME'); const dest = path.resolve(__dirname, 'docs/.vuepress/dist/CNAME'); try { fs.copyFileSync(src, dest); console.log('CNAME copied to docs dist') } catch (err) { console.error('复制CNAME失败:', err.message); process.exit(1) }\"",
     "docs:dev": "vuepress dev docs",
     "lint": "eslint --ext .js,.vue lib docs",
     "semantic-release": "semantic-release",
