@@ -3,9 +3,7 @@ require('dotenv').config()
 
 module.exports = {
   title: 'Metal-Organic-Framework',
-
   description: "MOF INFO. of cgy's blog",
-
   locales: {
     '/': {
       lang: 'en-US',
@@ -19,6 +17,14 @@ module.exports = {
       '@vuepress/google-analytics',
       {
         ga: 'UA-132770851-331',
+      },
+      'sitemap',
+      {
+        hostname: 'https://mof.top',
+        exclude: ['/404.html'],
+        dateFormatter: (date) => {
+          return new Date(date).toISOString()
+        },
       },
     ],
   ],
@@ -53,7 +59,8 @@ module.exports = {
       description: 'MOF',
       email: '307191020@qq.com',
       location: 'GZ, China',
-      avatar: 'https://media.istockphoto.com/id/183047071/zh/%E7%85%A7%E7%89%87/glucosamine-model.jpg?s=1024x1024&w=is&k=20&c=IEEVy-GBToPRGR81qCKAaWkquc_4f9lL_B_nFPJDjj0=',
+      avatar:
+        'https://media.istockphoto.com/id/183047071/zh/%E7%85%A7%E7%89%87/glucosamine-model.jpg?s=1024x1024&w=is&k=20&c=IEEVy-GBToPRGR81qCKAaWkquc_4f9lL_B_nFPJDjj0=',
     },
 
     header: {
@@ -67,8 +74,7 @@ module.exports = {
     footer: {
       poweredBy: true,
       poweredByTheme: true,
-      custom:
-        'Copyright 2018-present cgy | MIT License',
+      custom: 'Copyright 2018-present cgy | MIT License',
     },
 
     infoCard: {
