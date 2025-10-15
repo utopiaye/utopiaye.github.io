@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 1. 首页（必须包含） -->
+  <url>
+    <loc>https://mof.top/</loc> <!-- 你的首页完整URL -->
+    <lastmod>2025-10-16</lastmod> <!-- 页面最后更新日期（格式 YYYY-MM-DD） -->
+    <priority>1.0</priority> <!-- 优先级（1.0最高，首页建议设1.0） -->
+  </url>
+
+  <!-- 2. 其他页面（按实际页面补充，每个页面一条<url>） -->
+  <url>
+    <loc>https://mof.top/食品保鲜与智能包装中的框架材料应用/</loc> <!-- 文章1 URL -->
+    <lastmod>2025-10-16</lastmod>
+    <priority>0.8</priority> <!-- 普通页面设0.8即可 -->
+  </url>
+  <url>
+    <loc>https://mof.top/MOF材料在储能电池中的应用进展/</loc> <!-- 文章2 URL -->
+    <lastmod>2025-10-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <!-- 若有更多页面，继续按上述格式添加 -->
+</urlset>
